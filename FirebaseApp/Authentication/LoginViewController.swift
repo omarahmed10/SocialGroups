@@ -23,7 +23,7 @@ class LoginViewController:UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
+//        view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         
         continueButton = RoundedWhiteButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
         continueButton.setTitleColor(secondaryColor, for: .normal)

@@ -12,13 +12,14 @@ class UserProfile {
     var uid:String
     var username:String
     var photoURL:URL
-    var country : String
-    
-    init(uid:String, username:String,photoURL:URL,country:String) {
+    var nationality : String
+    var email : String
+    init(uid:String, username:String,photoURL:URL,country:String,email:String) {
         self.uid = uid
         self.username = username
         self.photoURL = photoURL
-        self.country = country
+        self.nationality = country
+        self.email = email
     }
 }
 

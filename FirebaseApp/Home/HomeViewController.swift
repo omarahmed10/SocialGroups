@@ -51,12 +51,15 @@ class HomeViewController:UIViewController, UITableViewDelegate, UITableViewDataS
         tableView.reloadData()
         
         //observePosts()
-        beginBatchFetch()
+//        beginBatchFetch()
         
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        beginBatchFetch()
+    }
     func fetchPosts(completion:@escaping (_ posts:[Post])->()) {
-        let postsRef = Database.database().reference().child("posts")
+        let postsRef = Database.database().reference().child("Posts")
         var queryRef:DatabaseQuery
         let lastPost = posts.last
         if lastPost != nil {
@@ -74,16 +77,25 @@ class HomeViewController:UIViewController, UITableViewDelegate, UITableViewDataS
                     let dict = childSnapshot.value as? [String:Any],
                     let author = dict["author"] as? [String:Any],
                     let uid = author["uid"] as? String,
-                    let username = author["username"] as? String,
+                    let username = author["name"] as? String,
                     let photoURL = author["photoURL"] as? String,
-                    let countryName = author["country"] as? String,
+                    let countryName = author["nationality"] as? String,
+                    let email = author["email"] as? String,
                     let url = URL(string:photoURL),
-                    let text = dict["text"] as? String,
+                    let content = dict["content"] as? String,
+                    let numLikes = dict["numLikes"] as? Int,
+                    let type = dict["type"] as? String,
+//                    let comments = dict["comments"] as? [String],
                     let timestamp = dict["timestamp"] as? Double {
                     
                     if childSnapshot.key != lastPost?.id {
-                        let userProfile = UserProfile(uid: uid, username: username, photoURL: url, country: countryName)
-                        let post = Post(id: childSnapshot.key, author: userProfile, text: text, timestamp:timestamp)
+                        let userProfile = UserProfile(uid: uid, username: username, photoURL: url, country: countryName, email: email)
+                        var comments = [String]()
+                        if let _comments = dict["comments"] as? [String]{
+                            comments = _comments
+                        }
+                        let post = Post(id: childSnapshot.key, author: userProfile, text: content, timestamp:timestamp, numLikes: numLikes
+                            , type: PostType.Article, comments: comments)
                         tempPosts.insert(post, at: 0)
                     }
                     

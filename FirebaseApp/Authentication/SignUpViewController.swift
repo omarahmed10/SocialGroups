@@ -21,7 +21,7 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var tapToChangeProfileButton: UIButton!
     
-    var continueButton:RoundedWhiteButton!
+//    var continueButton:RoundedWhiteButton!
     var activityView:UIActivityIndicatorView!
     
     var imagePicker:UIImagePickerController!
@@ -29,27 +29,28 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
     var countries: [String] = []
     var countrySelected : String?
     
+    @IBOutlet weak var signUPButton: RoundedWhiteButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
+//        view.addVerticalGradientLayer(topColor: primaryColor, bottomColor: secondaryColor)
         
-        continueButton = RoundedWhiteButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        continueButton.setTitleColor(secondaryColor, for: .normal)
-        continueButton.setTitle("Continue", for: .normal)
-        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFont.Weight.bold)
-        continueButton.center = CGPoint(x: view.center.x, y: view.frame.height - continueButton.frame.height)
-        continueButton.highlightedColor = UIColor(white: 1.0, alpha: 1.0)
-        continueButton.defaultColor = UIColor.white
-        continueButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
-        
-        view.addSubview(continueButton)
-        setContinueButton(enabled: false)
+//        continueButton = RoundedWhiteButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+//        continueButton.setTitleColor(secondaryColor, for: .normal)
+//        continueButton.setTitle("Continue", for: .normal)
+//        continueButton.titleLabel?.font = UIFont.systemFont(ofSize: 18.0, weight: UIFont.Weight.bold)
+//        continueButton.center = CGPoint(x: view.center.x, y: view.frame.height - continueButton.frame.height)
+//        continueButton.highlightedColor = UIColor(white: 1.0, alpha: 1.0)
+//        continueButton.defaultColor = UIColor.white
+//        continueButton.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+//
+//        view.addSubview(continueButton)
+//        setContinueButton(enabled: false)
         
         activityView = UIActivityIndicatorView(activityIndicatorStyle: .gray)
         activityView.color = secondaryColor
         activityView.frame = CGRect(x: 0, y: 0, width: 50.0, height: 50.0)
-        activityView.center = continueButton.center
+//        activityView.center = continueButton.center
         
         view.addSubview(activityView)
         
@@ -82,6 +83,7 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
             let name = NSLocale(localeIdentifier: "en_UK").displayName(forKey: NSLocale.Key.identifier, value: id) ?? "Country not found for code: \(code)"
             countries.append(name)
         }
+        countrySelected = countries[0]
         countryPicker.dataSource = self
         countryPicker.delegate = self
     }
@@ -128,9 +130,9 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
         let info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        continueButton.center = CGPoint(x: view.center.x,
-                                        y: view.frame.height - keyboardFrame.height - 16.0 - continueButton.frame.height / 2)
-        activityView.center = continueButton.center
+//        continueButton.center = CGPoint(x: view.center.x,
+//                                        y: view.frame.height - keyboardFrame.height - 16.0 - continueButton.frame.height / 2)
+//        activityView.center = continueButton.center
     }
     
     /**
@@ -146,7 +148,7 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
         let confirmPassword = confirmPasswordField.text
 
         let formFilled = username != nil && username != "" && email != nil && email != "" && password != nil && password != "" && confirmPassword != nil && confirmPassword != ""
-        setContinueButton(enabled: formFilled)
+//        setContinueButton(enabled: formFilled)
     }
     
     
@@ -178,30 +180,32 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
     }
     
     /**
-     Enables or Disables the **continueButton**.
+     Enables or Disables the **ß**.
      */
     
-    func setContinueButton(enabled:Bool) {
-        if enabled {
-            continueButton.alpha = 1.0
-            continueButton.isEnabled = true
-        } else {
-            continueButton.alpha = 0.5
-            continueButton.isEnabled = false
-        }
-    }
+//    func setContinueButton(enabled:Bool) {
+//        if enabled {
+//            continueButton.alpha = 1.0
+//            continueButton.isEnabled = true
+//        } else {
+//            continueButton.alpha = 0.5
+//            continueButton.isEnabled = false
+//        }
+//    }
     
-    @objc func handleSignUp() {
+    @IBAction func handleSignUp() {
         guard let username = usernameField.text else { return }
         guard let email = emailField.text else { return }
         guard let pass = passwordField.text else { return }
         guard let image = profileImageView.image else { return }
         guard let confirmPass = confirmPasswordField.text else {return}
         guard let country = countrySelected else {return}
+        if pass != confirmPass {
+            return
+        }
         
-        
-        setContinueButton(enabled: false)
-        continueButton.setTitle("", for: .normal)
+//        setContinueButton(enabled: false)
+//        continueButton.setTitle("", for: .normal)
         activityView.startAnimating()
         
         Auth.auth().createUser(withEmail: email, password: pass) { user, error in
@@ -222,7 +226,7 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
                             if error == nil {
                                 print("User display name changed!")
                                 
-                                self.saveProfile(username: username,country: country, profileImageURL: url!) { success in
+                                self.saveProfile(uid: Auth.auth().currentUser?.uid ?? "", username: username,country: country, email: email, profileImageURL: url!) { success in
                                     if success {
                                         self.dismiss(animated: true, completion: nil)
                                     } else {
@@ -252,14 +256,14 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         
-        setContinueButton(enabled: true)
-        continueButton.setTitle("Continue", for: .normal)
+//        setContinueButton(enabled: true)
+//        continueButton.setTitle("Continue", for: .normal)
         activityView.stopAnimating()
     }
     
     func uploadProfileImage(_ image:UIImage, completion: @escaping ((_ url:URL?)->())) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let storageRef = Storage.storage().reference().child("user/\(uid)")
+        let storageRef = Storage.storage().reference().child("Profile_images/\(uid)")
         
         guard let imageData = UIImageJPEGRepresentation(image, 0.75) else { return }
         
@@ -280,13 +284,15 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
         }
     }
     
-    func saveProfile(username:String, country: String, profileImageURL:URL, completion: @escaping ((_ success:Bool)->())) {
+    func saveProfile(uid:String,username:String, country: String,email:String, profileImageURL:URL, completion: @escaping ((_ success:Bool)->())) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         let databaseRef = Database.database().reference().child("Users/\(uid)")
         
         let userObject = [
-            "username": username,
-            "country": country,
+            "email" : email,
+            "id" : uid,
+            "name": username,
+            "nationality": country,
             "photoURL": profileImageURL.absoluteString
         ] as [String:Any]
         

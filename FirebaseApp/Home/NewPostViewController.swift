@@ -23,16 +23,22 @@ class NewPostViewController:UIViewController, UITextViewDelegate {
         guard let userProfile = UserService.currentUserProfile else { return }
         // Firebase code here
         
-        let postRef = Database.database().reference().child("posts").childByAutoId()
+        let postRef = Database.database().reference().child("Posts").childByAutoId()
         
         let postObject = [
             "author": [
                 "uid": userProfile.uid,
-                "username": userProfile.username,
-                "photoURL": userProfile.photoURL.absoluteString
+                "name": userProfile.username,
+                "photoURL": userProfile.photoURL.absoluteString,
+                "nationality": userProfile.nationality,
+                "email": userProfile.email
+                
             ],
-            "text": textView.text,
-            "timestamp": [".sv":"timestamp"]
+            "content": textView.text,
+            "timestamp": [".sv":"timestamp"],
+            "numLikes": 0,
+            "type": PostType.Article.rawValue,
+            "comments":[String]()
         ] as [String:Any]
         
         postRef.setValue(postObject, withCompletionBlock: { error, ref in
