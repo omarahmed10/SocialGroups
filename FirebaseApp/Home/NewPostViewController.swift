@@ -26,19 +26,20 @@ class NewPostViewController:UIViewController, UITextViewDelegate {
         let postRef = Database.database().reference().child("Posts").childByAutoId()
         
         let postObject = [
-            "author": [
-                "uid": userProfile.uid,
-                "name": userProfile.username,
-                "photoURL": userProfile.photoURL.absoluteString,
-                "nationality": userProfile.nationality,
-                "email": userProfile.email
-                
-            ],
-            "content": textView.text,
-            "timestamp": [".sv":"timestamp"],
-            "numLikes": 0,
-            "type": PostType.Article.rawValue,
-            "comments":[String]()
+        //            "author": [
+        //                "uid": userProfile.uid,
+        //                "name": userProfile.username,
+        //                "photoURL": userProfile.photoURL.absoluteString,
+        //                "nationality": userProfile.nationality,
+        //                "email": userProfile.email
+        //
+        //            ],
+        "ownerId": userProfile.uid,
+        "content": textView.text,
+        "timestamp": [".sv":"timestamp"],
+        "numLikes": 0,
+        "type": PostType.Article.rawValue,
+        "comments":[String]()
         ] as [String:Any]
         
         postRef.setValue(postObject, withCompletionBlock: { error, ref in

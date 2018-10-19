@@ -240,12 +240,14 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
                             }
                         }
                     } else {
+                        
                         self.resetForm()
                     }
                     
                 }
                 
             } else {
+                print("Error: \(error!.localizedDescription)")
                 self.resetForm()
             }
         }

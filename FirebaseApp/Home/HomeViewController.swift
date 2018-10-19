@@ -75,28 +75,31 @@ class HomeViewController:UIViewController, UITableViewDelegate, UITableViewDataS
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot,
                     let dict = childSnapshot.value as? [String:Any],
-                    let author = dict["author"] as? [String:Any],
-                    let uid = author["uid"] as? String,
-                    let username = author["name"] as? String,
-                    let photoURL = author["photoURL"] as? String,
-                    let countryName = author["nationality"] as? String,
-                    let email = author["email"] as? String,
-                    let url = URL(string:photoURL),
+                    let ownerId = dict["ownerId"] as? String,
+                    //                    let uid = author["uid"] as? String,
+                    //                    let username = author["name"] as? String,
+                    //                    let photoURL = author["photoURL"] as? String,
+                    //                    let countryName = author["nationality"] as? String,
+                    //                    let email = author["email"] as? String,
+                    //                    let url = URL(string:photoURL),
                     let content = dict["content"] as? String,
                     let numLikes = dict["numLikes"] as? Int,
                     let type = dict["type"] as? String,
-//                    let comments = dict["comments"] as? [String],
+                    //                    let comments = dict["comments"] as? [String],
                     let timestamp = dict["timestamp"] as? Double {
                     
                     if childSnapshot.key != lastPost?.id {
-                        let userProfile = UserProfile(uid: uid, username: username, photoURL: url, country: countryName, email: email)
-                        var comments = [String]()
-                        if let _comments = dict["comments"] as? [String]{
-                            comments = _comments
+                        UserService.observeUserProfile(ownerId) { userProfile in
+                            if let _userProfile = userProfile {
+                                var comments = [String]()
+                                if let _comments = dict["comments"] as? [String]{
+                                    comments = _comments
+                                }
+                                let post = Post(id: childSnapshot.key, author: _userProfile, text: content, timestamp:timestamp, numLikes: numLikes
+                                    , type: Post.type(of: type), comments: comments)
+                                tempPosts.insert(post, at: 0)
+                            }
                         }
-                        let post = Post(id: childSnapshot.key, author: userProfile, text: content, timestamp:timestamp, numLikes: numLikes
-                            , type: PostType.Article, comments: comments)
-                        tempPosts.insert(post, at: 0)
                     }
                     
                 }

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		079734C5217A2659001030E7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C4217A2658001030E7 /* Group.swift */; };
+		079734CD217A2F3D001030E7 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C7217A2F3B001030E7 /* MenuTableViewCell.swift */; };
+		079734CE217A2F3D001030E7 /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C8217A2F3B001030E7 /* CenterViewControllerDelegate.swift */; };
+		079734CF217A2F3D001030E7 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C9217A2F3C001030E7 /* CenterViewController.swift */; };
+		079734D0217A2F3D001030E7 /* SidePanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734CA217A2F3C001030E7 /* SidePanelViewController.swift */; };
+		079734D1217A2F3D001030E7 /* SidePanelViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734CB217A2F3D001030E7 /* SidePanelViewControllerDelegate.swift */; };
+		079734D2217A2F3D001030E7 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734CC217A2F3D001030E7 /* ContainerViewController.swift */; };
+		079734D4217A2F50001030E7 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734D3217A2F4F001030E7 /* UIView+Shadow.swift */; };
 		A532550CD0244022A8D278B5 /* Pods_FirebaseApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8F272F2CC379BF3D39E51153 /* Pods_FirebaseApp.framework */; };
 		B02F5958213334DE00D138B9 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B02F5956213334DE00D138B9 /* LoadingCell.swift */; };
 		B0330FFE2031700E00FE2203 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0330FFD2031700E00FE2203 /* ImageService.swift */; };
@@ -31,6 +39,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		079734C4217A2658001030E7 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		079734C7217A2F3B001030E7 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
+		079734C8217A2F3B001030E7 /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
+		079734C9217A2F3C001030E7 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
+		079734CA217A2F3C001030E7 /* SidePanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidePanelViewController.swift; sourceTree = "<group>"; };
+		079734CB217A2F3D001030E7 /* SidePanelViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidePanelViewControllerDelegate.swift; sourceTree = "<group>"; };
+		079734CC217A2F3D001030E7 /* ContainerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
+		079734D3217A2F4F001030E7 /* UIView+Shadow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
 		6580728F4CE95C2C81CE978D /* Pods-FirebaseApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirebaseApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FirebaseApp/Pods-FirebaseApp.debug.xcconfig"; sourceTree = "<group>"; };
 		8F272F2CC379BF3D39E51153 /* Pods_FirebaseApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FirebaseApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B02F5956213334DE00D138B9 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
@@ -90,6 +106,7 @@
 		B08C14E6202CE5E20061819B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				079734C4217A2658001030E7 /* Group.swift */,
 				B08C14E7202CE5EF0061819B /* Post.swift */,
 				B08C14ED202E703C0061819B /* UserProfile.swift */,
 			);
@@ -119,6 +136,12 @@
 		B08C14F1203163F90061819B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				079734C9217A2F3C001030E7 /* CenterViewController.swift */,
+				079734C8217A2F3B001030E7 /* CenterViewControllerDelegate.swift */,
+				079734CC217A2F3D001030E7 /* ContainerViewController.swift */,
+				079734C7217A2F3B001030E7 /* MenuTableViewCell.swift */,
+				079734CA217A2F3C001030E7 /* SidePanelViewController.swift */,
+				079734CB217A2F3D001030E7 /* SidePanelViewControllerDelegate.swift */,
 				B0E78FF82025025E002DA8AF /* HomeViewController.swift */,
 				B08C14E9202E55C30061819B /* NewPostViewController.swift */,
 				B08C14DF202CDF9B0061819B /* PostTableViewCell.swift */,
@@ -140,6 +163,7 @@
 		B08C14FA20316D1A0061819B /* User Interface */ = {
 			isa = PBXGroup;
 			children = (
+				079734D3217A2F4F001030E7 /* UIView+Shadow.swift */,
 				B0E79000202504FE002DA8AF /* RoundedWhiteButton.swift */,
 			);
 			path = "User Interface";
@@ -305,18 +329,26 @@
 				B08C14EE202E703C0061819B /* UserProfile.swift in Sources */,
 				B08C14EA202E55C30061819B /* NewPostViewController.swift in Sources */,
 				B0E79001202504FE002DA8AF /* SignUpViewController.swift in Sources */,
+				079734C5217A2659001030E7 /* Group.swift in Sources */,
 				B0E78FFB202504E1002DA8AF /* InitialViewController.swift in Sources */,
+				079734CD217A2F3D001030E7 /* MenuTableViewCell.swift in Sources */,
 				B0E79004202504FE002DA8AF /* HelperExtensions.swift in Sources */,
 				B0E78FF92025025E002DA8AF /* HomeViewController.swift in Sources */,
+				079734CE217A2F3D001030E7 /* CenterViewControllerDelegate.swift in Sources */,
 				B0E79003202504FE002DA8AF /* MenuViewController.swift in Sources */,
 				B0E78FD92024FDEF002DA8AF /* AppDelegate.swift in Sources */,
 				B0E79002202504FE002DA8AF /* LoginViewController.swift in Sources */,
+				079734D0217A2F3D001030E7 /* SidePanelViewController.swift in Sources */,
 				B02F5958213334DE00D138B9 /* LoadingCell.swift in Sources */,
+				079734D2217A2F3D001030E7 /* ContainerViewController.swift in Sources */,
 				B08C14EC202E70080061819B /* UserService.swift in Sources */,
 				B0E79005202504FE002DA8AF /* RoundedWhiteButton.swift in Sources */,
 				B08C14E1202CDF9B0061819B /* PostTableViewCell.swift in Sources */,
+				079734CF217A2F3D001030E7 /* CenterViewController.swift in Sources */,
+				079734D1217A2F3D001030E7 /* SidePanelViewControllerDelegate.swift in Sources */,
 				B08C14E8202CE5EF0061819B /* Post.swift in Sources */,
 				B0330FFE2031700E00FE2203 /* ImageService.swift in Sources */,
+				079734D4217A2F50001030E7 /* UIView+Shadow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

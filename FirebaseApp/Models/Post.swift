@@ -31,3 +31,12 @@ class Post {
         self.comments = comments
     }
 }
+extension Post{
+    static func type(of post: String) -> PostType {
+        switch post {
+        case "Article":return .Article
+        case "Photo":return .Photo
+        default:return .Article
+        }
+    }
+}

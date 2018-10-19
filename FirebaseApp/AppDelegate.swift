@@ -32,10 +32,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserService.observeUserProfile(user!.uid) { userProfile in
                     UserService.currentUserProfile = userProfile
                 }
-                //
-                let controller = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
-                self.window?.rootViewController = controller
+                let containerViewController = ContainerViewController()
+                
+                self.window?.rootViewController = containerViewController
                 self.window?.makeKeyAndVisible()
+                //
+//                let controller = storyboard.instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+//                self.window?.rootViewController = controller
+//                self.window?.makeKeyAndVisible()
             } else {
                 
                 
