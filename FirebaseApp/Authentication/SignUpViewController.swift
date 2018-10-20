@@ -230,31 +230,31 @@ class SignUpViewController:UIViewController, UITextFieldDelegate, UIPickerViewDa
                                     if success {
                                         self.dismiss(animated: true, completion: nil)
                                     } else {
-                                        self.resetForm()
+                                        self.resetForm("Error while signup please try again.")
                                     }
                                 }
                                 
                             } else {
                                 print("Error: \(error!.localizedDescription)")
-                                self.resetForm()
+                                self.resetForm(error!.localizedDescription)
                             }
                         }
                     } else {
                         
-                        self.resetForm()
+                        self.resetForm("error uploading your image")
                     }
                     
                 }
                 
             } else {
                 print("Error: \(error!.localizedDescription)")
-                self.resetForm()
+                self.resetForm(error!.localizedDescription)
             }
         }
     }
     
-    func resetForm() {
-        let alert = UIAlertController(title: "Error signing up", message: nil, preferredStyle: .alert)
+    func resetForm(_ message : String) {
+        let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
         

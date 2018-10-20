@@ -15,7 +15,7 @@ class HomeViewController:UIViewController, UITableViewDelegate, UITableViewDataS
     var tableView:UITableView!
     var cellHeights: [IndexPath : CGFloat] = [:]
 
-    
+    var postsID = [String]()
     var posts = [Post]()
     var fetchingMore = false
     var endReached = false
@@ -60,48 +60,32 @@ class HomeViewController:UIViewController, UITableViewDelegate, UITableViewDataS
     }
     func fetchPosts(completion:@escaping (_ posts:[Post])->()) {
         let postsRef = Database.database().reference().child("Posts")
-        var queryRef:DatabaseQuery
-        let lastPost = posts.last
-        if lastPost != nil {
-            let lastTimestamp = lastPost!.createdAt.timeIntervalSince1970 * 1000
-            queryRef = postsRef.queryOrdered(byChild: "timestamp").queryEnding(atValue: lastTimestamp).queryLimited(toLast: 20)
-        } else {
-            queryRef = postsRef.queryOrdered(byChild: "timestamp").queryLimited(toLast: 20)
-        }
-        
-        queryRef.observeSingleEvent(of: .value, with: { snapshot in
+        let queryRef = postsRef.queryOrdered(byChild: "timestamp")
+        queryRef.observe(.value, with: { snapshot in
             var tempPosts = [Post]()
             
             for child in snapshot.children {
                 if let childSnapshot = child as? DataSnapshot,
                     let dict = childSnapshot.value as? [String:Any],
                     let ownerId = dict["ownerId"] as? String,
-                    //                    let uid = author["uid"] as? String,
-                    //                    let username = author["name"] as? String,
-                    //                    let photoURL = author["photoURL"] as? String,
-                    //                    let countryName = author["nationality"] as? String,
-                    //                    let email = author["email"] as? String,
-                    //                    let url = URL(string:photoURL),
                     let content = dict["content"] as? String,
                     let numLikes = dict["numLikes"] as? Int,
                     let type = dict["type"] as? String,
-                    //                    let comments = dict["comments"] as? [String],
+                    let id = dict["id"] as? String,
                     let timestamp = dict["timestamp"] as? Double {
-                    
-                    if childSnapshot.key != lastPost?.id {
-                        UserService.observeUserProfile(ownerId) { userProfile in
-                            if let _userProfile = userProfile {
-                                var comments = [String]()
-                                if let _comments = dict["comments"] as? [String]{
-                                    comments = _comments
-                                }
+                    UserService.observeUserProfile(ownerId) { userProfile in
+                        if let _userProfile = userProfile {
+                            var comments = [String]()
+                            if let _comments = dict["comments"] as? [String]{
+                                comments = _comments
+                            }
+                            if self.postsID.contains(id) {
                                 let post = Post(id: childSnapshot.key, author: _userProfile, text: content, timestamp:timestamp, numLikes: numLikes
                                     , type: Post.type(of: type), comments: comments)
                                 tempPosts.insert(post, at: 0)
                             }
                         }
                     }
-                    
                 }
             }
             
@@ -160,13 +144,8 @@ class HomeViewController:UIViewController, UITableViewDelegate, UITableViewDataS
     }
     
     func beginBatchFetch() {
-        fetchingMore = true
-        self.tableView.reloadSections(IndexSet(integer: 1), with: .fade)
-        
         fetchPosts { newPosts in
-            self.posts.append(contentsOf: newPosts)
-            self.fetchingMore = false
-            self.endReached = newPosts.count == 0
+            self.posts = newPosts
             UIView.performWithoutAnimation {
                 self.tableView.reloadData()
             }

@@ -34,6 +34,7 @@ class NewPostViewController:UIViewController, UITextViewDelegate {
         //                "email": userProfile.email
         //
         //            ],
+            "id":postRef.key,
         "ownerId": userProfile.uid,
         "content": textView.text,
         "timestamp": [".sv":"timestamp"],

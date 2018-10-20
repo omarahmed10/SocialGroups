@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		072D824E217B8C2900E1E03E /* NewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072D824D217B8C2900E1E03E /* NewGroupViewController.swift */; };
 		079734C5217A2659001030E7 /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C4217A2658001030E7 /* Group.swift */; };
 		079734CD217A2F3D001030E7 /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C7217A2F3B001030E7 /* MenuTableViewCell.swift */; };
 		079734CE217A2F3D001030E7 /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 079734C8217A2F3B001030E7 /* CenterViewControllerDelegate.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		072D824D217B8C2900E1E03E /* NewGroupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewGroupViewController.swift; sourceTree = "<group>"; };
 		079734C4217A2658001030E7 /* Group.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		079734C7217A2F3B001030E7 /* MenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		079734C8217A2F3B001030E7 /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				B08C14DF202CDF9B0061819B /* PostTableViewCell.swift */,
 				B08C14E0202CDF9B0061819B /* PostTableViewCell.xib */,
 				B02F5956213334DE00D138B9 /* LoadingCell.swift */,
+				072D824D217B8C2900E1E03E /* NewGroupViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -339,6 +342,7 @@
 				B0E78FD92024FDEF002DA8AF /* AppDelegate.swift in Sources */,
 				B0E79002202504FE002DA8AF /* LoginViewController.swift in Sources */,
 				079734D0217A2F3D001030E7 /* SidePanelViewController.swift in Sources */,
+				072D824E217B8C2900E1E03E /* NewGroupViewController.swift in Sources */,
 				B02F5958213334DE00D138B9 /* LoadingCell.swift in Sources */,
 				079734D2217A2F3D001030E7 /* ContainerViewController.swift in Sources */,
 				B08C14EC202E70080061819B /* UserService.swift in Sources */,
